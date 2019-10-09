@@ -1,2 +1,5 @@
-# l5rRPGAssistKit
-Assist Toolkit for L5R RPG tabletop game with features for character creation, campaign management, dice statistics, and communication.
+# React/Redux/Router Starter Project
+
+> Provided for the students of the [Bottega Code School](https://bottega.tech/)
+
+*Fork from [es6-webpack2-starter](https://github.com/micooz/es6-webpack2-starter)*
