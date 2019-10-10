@@ -1,0 +1,23 @@
+.nav-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .nav-link-wrapper {
+    font-weight: 600;
+    width: 100px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a {
+      text-align: center;
+      font-size: 1.5em;
+      text-decoration: none;
+      color: $red-ink;
+      transition: 0.5s ease-in-out;
+      &:hover {
+        font-size: 1.7em;
+      }
+    }
+  }
+}
