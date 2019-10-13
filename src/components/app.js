@@ -18,24 +18,39 @@ export default class App extends Component {
     this.state = {
       loggedIn: "LOGGED_IN"
     };
-    this.isLoggedIn = this.isLoggedIn.bind(this);
+    this.handleLogIn = this.handleLogIn.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
   }
 
-  isLoggedIn() {
-    return this.state.LoggedIn === "LOGGED_IN" ? true : false;
+  handleLogIn() {
+    this.setState({
+      loggedIn: "LOGGED_IN"
+    });
   }
 
+  handleLogOut() {
+    this.setState({
+      loggedIn: "LOGGED_OUT"
+    });
+  }
+  
   render() {
     return (
       <div className="app container">
         <Router>
           <div>
-            <NavBar loggedIn={this.state.loggedIn} />
+            <NavBar loggedIn={this.state.loggedIn} handleLogIn={this.handleLogIn} handleLogOut={this.handleLogOut}/>
 
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/character-creation" component={CharacterCreation} />
-              <Route path="/campaign-creation" component={CampaignCreation} />
+              <Route
+                exact
+                path="/"
+                render={props => (
+                  <Home {...props} loggedIn={this.state.loggedIn} />
+                )}
+              />
+              <Route path="/character-management" component={CharacterCreation} />
+              <Route path="/campaign-management" component={CampaignCreation} />
               <Route path="/campaign-search" component={CampaignSearch} />
               <Route path="/die-statistics" component={DieStats} />
               <Route path="/forum" component={Forum} />

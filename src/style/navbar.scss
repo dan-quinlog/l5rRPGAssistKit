@@ -13,10 +13,35 @@
       text-align: center;
       font-size: 1.5em;
       text-decoration: none;
-      color: $red-ink;
+      color: $dark-ink;
       transition: 0.5s ease-in-out;
       &:hover {
-        font-size: 1.7em;
+        color: $red-ink;
+      }
+    }
+    .nav-link-active {
+      color: $red-ink;
+    }
+  }
+  .tool-kit {
+    .tool-kit-dropdown {
+      background-color: $dark-parchment;
+      padding: 10px;
+      border-radius: 5px;
+      position: absolute;
+      top: 50px;
+      display: flex;
+      flex-direction: column;
+      a {
+        padding: 5px;
+      }
+    }
+    .hidden {
+      display: none;
+    }
+    &:hover {
+      .tool-kit-dropdown{
+        display: flex;
       }
     }
   }
