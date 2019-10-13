@@ -1,12 +1,48 @@
-import React from "react";
+import React, { Component } from "react";
 
-export default function() {
-  return (
-    <div>
-      Welcome to my home.
-      <br />
-      This is a student project page which aims to provide a online hub for the
-      L5R gaming community to build and play their campaigns.
-    </div>
-  );
+export default class Home extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    if (this.props.loggedIn === "LOGGED_IN") {
+      return (
+        <div className="home home-logged-in">
+          <div className="heading-wrapper">
+            Welcome to L5R RPG Assist Toolkit
+          </div>
+          <div className="body-wrapper">
+            <div className="default-script">Page main font!!</div>
+            <div className="fancy-script">The fancy script for IMPORTANT PEOPLE!!</div>
+            <div className="child-script">Children and ignorant people speaking lol!!</div>
+            <div className="regular-script">This will be for regular people talking!!</div>
+            <div className="alert-font">ALERTS will be posted in this!!</div>
+          </div>
+          <div className="home-footer-wrapper">Footer</div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="home home-logged-out">
+          <div className="heading-wrapper">
+            Welcome to L5R RPG Assist Toolkit
+          </div>
+          <div className="body-wrapper">
+            Whether you are playing at a table with your friends, or running a
+            campaign online, this toolkit should give you the features to make
+            your gaming easier! Here you can develop and save your campaign
+            data, including NPCs, characters, plot hooks, custom mechanics and
+            session notes. Character management that helps with calculating
+            experience spends and organizes equipment and opportunities for easy
+            access during a session. Communication features to allow players and
+            the GM to message each other globally or whispering. Die rolling is
+            facilitated in the system, and tracked in the notes so you can
+            always review what checks were pulled. Die statistics are also
+            provided so you can see what your chances are for any given test!
+          </div>
+          <div className="home-footer-wrapper">Footer</div>
+        </div>
+      );
+    }
+  }
 }
