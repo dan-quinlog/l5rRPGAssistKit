@@ -12,11 +12,11 @@ export default class Home extends Component {
             Welcome to L5R RPG Assist Toolkit
           </div>
           <div className="body-wrapper">
-            <div className="default-script">Page main font!!</div>
+            <div className="site-script">Page main font!!</div>
             <div className="fancy-script">The fancy script for IMPORTANT PEOPLE!!</div>
             <div className="child-script">Children and ignorant people speaking lol!!</div>
             <div className="regular-script">This will be for regular people talking!!</div>
-            <div className="alert-font">ALERTS will be posted in this!!</div>
+            <div className="alert-script">ALERTS will be posted in this!!</div>
           </div>
           <div className="home-footer-wrapper">Footer</div>
         </div>

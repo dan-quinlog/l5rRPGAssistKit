@@ -48,14 +48,14 @@ export default class NavBar extends Component {
               <NavLink to="/campaign-management">Campaign Management</NavLink>
               <NavLink to="/character-management">Campaign Management</NavLink>
               <NavLink to="/campaign-search">Search Campaigns</NavLink>
-              <NavLink to="/die-statistics">Die Statistics</NavLink>
+              <NavLink to="/die-statistics-page">Die Statistics</NavLink>
             </div>
           </div>
         ) : (
           <div className="nav-link-wrapper">
             <NavLink
               exact
-              to="/die-statistics"
+              to="/die-statistics-page"
               activeClassName="nav-link-active"
             >
               Die Statistics
