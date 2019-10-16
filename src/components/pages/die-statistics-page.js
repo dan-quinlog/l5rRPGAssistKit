@@ -319,7 +319,7 @@ export default class DieStatisticPage extends Component {
             className="dice-input"
             type="text"
             name="quantity_rolls"
-            placeholder="Roll Count (recommended = 1,000,000) *required"
+            placeholder="Roll Count *required (recommended = 500,000)"
             onChange={this.handleChange}
             value={this.state.quantity_rolls}
           />
