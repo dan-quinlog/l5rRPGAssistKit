@@ -23,6 +23,7 @@
     .button {
       padding: 10px;
       align-self: center;
+      font: 600 13.3333px Arial;
 
       &:focus{
         outline: none;
@@ -33,7 +34,7 @@
   .loading-spinner {
     position: absolute;
     font-size: 12em;
-    top: 50vh;
+    top: 37vh;
     left: 47vw;
 }
 
