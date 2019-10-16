@@ -15,7 +15,7 @@ export default class DieStatisticPage extends Component {
       quantity_rolls: "",
       isLoading: false,
       viewResult: false,
-      times_rolled: '',
+      times_rolled: "",
       roll_success: "",
       total_success: "",
       total_opportunity: "",
@@ -45,6 +45,7 @@ export default class DieStatisticPage extends Component {
       12: "explosive success strife"
     };
 
+    this.canSubmit = this.canSubmit.bind(this);
     this.handleStartRolling = this.handleStartRolling.bind(this);
     this.handleDieStatSubmit = this.handleDieStatSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -58,21 +59,26 @@ export default class DieStatisticPage extends Component {
   }
 
   handleStartRolling(event) {
-    this.setState({ isLoading: true });
-    event.preventDefault();
-    setTimeout(
-      function() {
-        this.handleDieStatSubmit();
-      }.bind(this),
-      100
-    );
+    if (this.canSubmit()) {
+      this.setState({ isLoading: true });
+      event.preventDefault();
+
+      setTimeout(
+        function() {
+          this.handleDieStatSubmit();
+        }.bind(this),
+        100
+      );
+    } else {
+      console.log("failed submit");
+    }
   }
 
   handleDieStatSubmit() {
-    const ring = this.state.quantity_ring;
-    const skill = this.state.quantity_skill;
+    const ring = this.state.quantity_ring || 0;
+    const skill = this.state.quantity_skill || 0;
     const kept = this.state.quantity_kept;
-    const tn = this.state.target_tn;
+    const tn = this.state.target_tn || 0;
     const opp = this.state.target_opp || 0;
     const advantage = this.state.advantaged;
     const total_rolls = this.state.quantity_rolls;
@@ -187,7 +193,7 @@ export default class DieStatisticPage extends Component {
     let kept_dice = [];
     for (let i = 0; i < result.length; i++) {
       let keep = false;
-      if (successCount < tn) {
+      if (successCount < tn || tn === 0) {
         if (result[i][0].indexOf("success") > -1) {
           successCount++;
           keep = true;
@@ -232,8 +238,21 @@ export default class DieStatisticPage extends Component {
       this.setState({
         [event.target.name]: event.target.value
       });
+      this.canSubmit();
     }
   }
+
+  canSubmit = () => {
+    if (
+      (this.state.quantity_ring !== "" || this.state.quantity_skill !== "") &&
+      this.state.quantity_kept !== "" &&
+      this.state.quantity_rolls !== ""
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   render() {
     return (
@@ -244,7 +263,7 @@ export default class DieStatisticPage extends Component {
         </h1>
         <form
           className="die-statistic-wrapper"
-          onSubmit={this.handleDieStatSubmit}
+          onSubmit={this.handleStartRolling}
         >
           <input
             className="dice-input"
@@ -266,7 +285,7 @@ export default class DieStatisticPage extends Component {
             className="dice-input"
             type="text"
             name="quantity_kept"
-            placeholder="Quantity Kept"
+            placeholder="Quantity Kept *required"
             onChange={this.handleChange}
             value={this.state.quantity_kept}
           />
@@ -300,17 +319,21 @@ export default class DieStatisticPage extends Component {
             className="dice-input"
             type="text"
             name="quantity_rolls"
-            placeholder="Note: larger roll counts will take longer to process"
+            placeholder="Roll Count (recommended = 1,000,000) *required"
             onChange={this.handleChange}
             value={this.state.quantity_rolls}
           />
-          <button
-            className="button"
-            onClick={this.handleStartRolling}
-            type="submit"
-          >
-            Submit
-          </button>
+          {this.canSubmit() ? (
+            <button
+              className="button"
+              onClick={this.handleStartRolling}
+              type="submit"
+            >
+              Submit
+            </button>
+          ) : (
+            <div className="button">Complete Form</div>
+          )}
         </form>
         {this.state.isLoading ? (
           <div className="loading-spinner">
@@ -321,8 +344,12 @@ export default class DieStatisticPage extends Component {
           <div className="die-result-view">
             Rolling {this.state.times_rolled} times:
             <br />
-            Roll Success: {this.state.roll_success}%
-            <br />
+            {this.state.target_tn !== "" ? (
+              <span>
+                Roll Success: {this.state.roll_success}%
+                <br />
+              </span>
+            ) : null}
             Average Success: {this.state.total_success}
             <br />
             Average Opportunity: {this.state.total_opportunity}
