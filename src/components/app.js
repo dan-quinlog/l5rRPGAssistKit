@@ -17,18 +17,19 @@ import Icons from "../icons/icons";
 export default class App extends Component {
   constructor(props) {
     super(props);
-    
+
     Icons();
 
     this.state = {
       loggedIn: "LOGGED_OUT"
     };
-    
+
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
   }
 
-  handleLogIn() {
+  handleLogIn(username, password) {
+    console.log('username: ', username, 'password: ', password)
     this.setState({
       loggedIn: "LOGGED_IN"
     });
@@ -39,13 +40,17 @@ export default class App extends Component {
       loggedIn: "LOGGED_OUT"
     });
   }
-  
+
   render() {
     return (
       <div className="app-container">
         <Router>
           <div className="app">
-            <NavBar loggedIn={this.state.loggedIn} handleLogIn={this.handleLogIn} handleLogOut={this.handleLogOut}/>
+            <NavBar
+              loggedIn={this.state.loggedIn}
+              handleLogOut={this.handleLogOut}
+              handleLogIn={this.handleLogIn}
+            />
 
             <Switch>
               <Route
@@ -55,13 +60,21 @@ export default class App extends Component {
                   <Home {...props} loggedIn={this.state.loggedIn} />
                 )}
               />
-              <Route path="/character-management" component={CharacterCreation} />
+              <Route
+                path="/character-management"
+                component={CharacterCreation}
+              />
               <Route path="/campaign-management" component={CampaignCreation} />
               <Route path="/campaign-search" component={CampaignSearch} />
               <Route path="/die-statistics-page" component={DieStats} />
               <Route path="/forum" component={Forum} />
               <Route path="/about" component={About} />
-              <Route path="/login" component={Login} />
+              <Route
+                path="/login"
+                render = {props => (
+                  <Login {...props} handleLogIn={this.handleLogIn} />
+                )}
+              />
 
               <Route component={NoMatch} />
             </Switch>

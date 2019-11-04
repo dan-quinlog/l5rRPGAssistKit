@@ -75,16 +75,18 @@ export default class NavBar extends Component {
         {this.props.loggedIn === "LOGGED_IN" ? (
           <div className="nav-link-wrapper">
             <NavLink exact to="/login" activeClassName="nav-link-active">
-              Account Settings
+              Account Settings 
             </NavLink>
-            <a onClick={this.props.handleLogOut}>Logout</a>
+            <a onClick={this.props.handleLogOut}> Logout</a>
           </div>
         ) : (
           <div className="nav-link-wrapper">
             <NavLink exact to="/login" activeClassName="nav-link-active">
-              Sign Up
+              Sign Up 
             </NavLink>
-            <a onClick={this.props.handleLogIn}>Login</a>
+            <NavLink exact to="/login" activeClassName="nav-link-active">
+              Login
+            </NavLink>
           </div>
         )}
       </div>
