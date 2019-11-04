@@ -23,13 +23,21 @@ body {
 
 .app-container {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: [left-boarder] minmax(20px, 300px) [left-margin] 1fr [right-margin] minmax(20px, 300px) [right-border];
   color: $dark-ink;
 }
 
 .app {
-  display: flex;
-  flex-direction: column;
+  grid-column: left-margin/right-margin;
+  display: grid;
+  grid-template-rows: [nav-bar-s] 60px [nav-bar-e body-s] 1fr [body-e];
+  & > * {
+    grid-row: body-s/body-e;
+  }
+  .nav-wrapper {
+    grid-row: nav-bar-s/nav-bar-e;
+  }
+
 }
 
 .button {

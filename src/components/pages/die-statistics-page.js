@@ -12,7 +12,7 @@ export default class DieStatisticPage extends Component {
       target_tn: "",
       target_opp: "",
       advantaged: "nullvantaged",
-      quantity_rolls: "",
+      quantity_rolls: 500000,
       isLoading: false,
       viewResult: false,
       times_rolled: "",
@@ -245,8 +245,7 @@ export default class DieStatisticPage extends Component {
   canSubmit = () => {
     if (
       (this.state.quantity_ring !== "" || this.state.quantity_skill !== "") &&
-      this.state.quantity_kept !== "" &&
-      this.state.quantity_rolls !== ""
+      this.state.quantity_kept !== ""
     ) {
       return true;
     } else {
@@ -265,48 +264,54 @@ export default class DieStatisticPage extends Component {
           className="die-statistic-wrapper"
           onSubmit={this.handleStartRolling}
         >
+          <div className='dice-statistic__ring dice-statistic__desc'><div className='dice-statistic__desc__title'>Ring Dice: </div></div>
           <input
-            className="dice-input"
+            className="dice-statistic__ring dice-statistic__input"
             type="text"
             name="quantity_ring"
-            placeholder="Ring Dice"
+            placeholder="Must roll at least 1 Ring or Skill"
             onChange={this.handleChange}
             value={this.state.quantity_ring}
           />
+          <div className='dice-statistic__skill dice-statistic__desc'><div className='dice-statistic__desc__title'>Skill Dice: </div></div>
           <input
-            className="dice-input"
+            className="dice-statistic__skill dice-statistic__input"
             type="text"
             name="quantity_skill"
-            placeholder="Skill Dice"
+            placeholder="Must roll at least 1 Ring or Skill"
             onChange={this.handleChange}
             value={this.state.quantity_skill}
           />
+          <div className='dice-statistic__quantity dice-statistic__desc'><div className='dice-statistic__desc__title'>Quantity Kept: </div></div>
           <input
-            className="dice-input"
+            className="dice-statistic__quantity dice-statistic__input"
             type="text"
             name="quantity_kept"
-            placeholder="Quantity Kept *required"
+            placeholder="Must keep at least 1 die"
             onChange={this.handleChange}
             value={this.state.quantity_kept}
           />
+          <div className='dice-statistic__tn dice-statistic__desc'><div className='dice-statistic__desc__title'>TN to Succeed: </div></div>
           <input
-            className="dice-input"
+            className="dice-statistic__tn dice-statistic__input"
             type="text"
             name="target_tn"
-            placeholder="Required TN to Succeed"
+            placeholder="Returns Success if TN met"
             onChange={this.handleChange}
             value={this.state.target_tn}
           />
+          <div className='dice-statistic__opp dice-statistic__desc'><div className='dice-statistic__desc__title'>Required Opp: </div></div>
           <input
-            className="dice-input"
+            className="dice-statistic__opp dice-statistic__input"
             type="text"
             name="target_opp"
-            placeholder="Required Opportunities"
+            placeholder="Returns Success if Opp met"
             onChange={this.handleChange}
             value={this.state.target_opp}
           />
+          <div className='dice-statistic__advantage dice-statistic__desc'><div className='dice-statistic__desc__title'>Advantage Type: </div></div>
           <select
-            className="dice-input"
+            className="dice-statistic__advantage dice-statistic__input dice-statistic__select"
             onChange={this.handleChange}
             value={this.state.advantaged}
             name="advantaged"
@@ -315,24 +320,16 @@ export default class DieStatisticPage extends Component {
             <option value="advantaged">Advantaged</option>
             <option value="disadvantaged">Disadvantaged</option>
           </select>
-          <input
-            className="dice-input"
-            type="text"
-            name="quantity_rolls"
-            placeholder="Roll Count *required (recommended = 500,000)"
-            onChange={this.handleChange}
-            value={this.state.quantity_rolls}
-          />
           {this.canSubmit() ? (
             <button
-              className="button"
+              className="button dice-statistic__submit"
               onClick={this.handleStartRolling}
               type="submit"
             >
               Submit
             </button>
           ) : (
-            <div className="button">Complete Form</div>
+            <div className="button dice-statistic__submit">Complete Form</div>
           )}
         </form>
         {this.state.isLoading ? (

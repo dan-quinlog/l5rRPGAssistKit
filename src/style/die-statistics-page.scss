@@ -2,21 +2,62 @@
   place-self: center;
 
   .die-statistic-wrapper {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: [ring-s] 65px [ring-e skill-s] 65px [skill-e quantity-s] 65px [quantity-e tn-s] 65px [tn-e opp-s] 65px [opp-e advantage-s] 65px [advantage-e submit-s] 65px [submit-e];
+    grid-template-columns: [desc-s field-s] 1fr [desc-e field-e];
+    row-gap: 10px;
 
-    .dice-input {
-      text-align: center;
-      text-align-last: center;
-      font-weight: 600;
-      color: $dark-ink;
-      margin: 5px;
-      background-color: $dark-parchment;
-      border: none;
-      padding: 10px;
+    .dice-statistic {
+      &__ring {
+        grid-row: ring-s/ring-e;
+      }
+      &__skill {
+        grid-row: skill-s/skill-e;
+      }
+      &__quantity {
+        grid-row: quantity-s/quantity-e;
+      }
+      &__tn {
+        grid-row: tn-s/tn-e;
+      }
+      &__opp {
+        grid-row: opp-s/opp-e;
+      }
+      &__advantage {
+        grid-row: advantage-s/advantage-e;
+        option {
+          background: $dark-parchment;
+        }
+      }
+      &__submit {
+        grid-row: submit-s/submit-e;
+        grid-column: 1/-1;
+      }
+      &__desc {
+        grid-column: desc-s/desc-e;
+        background-color: $dark-parchment;
+        border-radius: 5px;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 10px [title-s] 1fr;
+        & > * {
+          grid-column: title-s;
+          font-size: 18px;
+          font-weight: 600;
+        }
+      }
+      &__input {
+        grid-column: field-s/field-e;
+        text-indent: 150px;
+        font-weight: 600;
+        color: $dark-ink;
+        background-color: transparent;
+        border: none;
+        z-index: 10;
 
-      &:focus{
-        outline: none;
+        &:focus {
+          outline: none;
+        }
       }
     }
 
@@ -25,7 +66,7 @@
       align-self: center;
       font: 600 13.3333px Arial;
 
-      &:focus{
+      &:focus {
         outline: none;
       }
     }
@@ -34,9 +75,11 @@
   .loading-spinner {
     position: absolute;
     font-size: 12em;
-    top: 37vh;
-    left: 47vw;
-}
+    top: 50%;
+    margin-top: -50px;
+    left: 50%;
+    margin-left: -50px;
+  }
 
   .hidden {
     display: none;
@@ -47,6 +90,5 @@
     text-align: center;
     margin-top: 50px;
     font-weight: 600;
-}
-
+  }
 }
