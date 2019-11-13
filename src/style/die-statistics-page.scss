@@ -3,7 +3,7 @@
 
   .die-statistic-wrapper {
     display: grid;
-    grid-template-rows: [ring-s] 65px [ring-e skill-s] 65px [skill-e quantity-s] 65px [quantity-e tn-s] 65px [tn-e opp-s] 65px [opp-e advantage-s] 65px [advantage-e submit-s] 65px [submit-e];
+    grid-template-rows: 20px [ring-s] 65px [ring-e skill-s] 65px [skill-e quantity-s] 65px [quantity-e tn-s] 65px [tn-e opp-s] 65px [opp-e advantage-s] 65px [advantage-e submit-s] 65px [submit-e];
     grid-template-columns: [desc-s field-s] 1fr [desc-e field-e];
     row-gap: 10px;
 

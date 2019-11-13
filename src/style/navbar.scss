@@ -11,7 +11,6 @@
     align-items: center;
     a {
       text-align: center;
-      font-size: 1.5em;
       text-decoration: none;
       color: $dark-ink;
       transition: 0.5s ease-in-out;
@@ -29,7 +28,7 @@
       padding: 10px;
       border-radius: 5px;
       position: absolute;
-      top: 50px;
+      top: 75px;
       display: flex;
       flex-direction: column;
       a {

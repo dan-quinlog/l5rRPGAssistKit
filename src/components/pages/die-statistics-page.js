@@ -238,7 +238,6 @@ export default class DieStatisticPage extends Component {
       this.setState({
         [event.target.name]: event.target.value
       });
-      this.canSubmit();
     }
   }
 
@@ -264,7 +263,9 @@ export default class DieStatisticPage extends Component {
           className="die-statistic-wrapper"
           onSubmit={this.handleStartRolling}
         >
-          <div className='dice-statistic__ring dice-statistic__desc'><div className='dice-statistic__desc__title'>Ring Dice: </div></div>
+          <div className="dice-statistic__ring dice-statistic__desc">
+            <div className="dice-statistic__desc__title">Ring Dice: </div>
+          </div>
           <input
             className="dice-statistic__ring dice-statistic__input"
             type="text"
@@ -273,7 +274,9 @@ export default class DieStatisticPage extends Component {
             onChange={this.handleChange}
             value={this.state.quantity_ring}
           />
-          <div className='dice-statistic__skill dice-statistic__desc'><div className='dice-statistic__desc__title'>Skill Dice: </div></div>
+          <div className="dice-statistic__skill dice-statistic__desc">
+            <div className="dice-statistic__desc__title">Skill Dice: </div>
+          </div>
           <input
             className="dice-statistic__skill dice-statistic__input"
             type="text"
@@ -282,7 +285,9 @@ export default class DieStatisticPage extends Component {
             onChange={this.handleChange}
             value={this.state.quantity_skill}
           />
-          <div className='dice-statistic__quantity dice-statistic__desc'><div className='dice-statistic__desc__title'>Quantity Kept: </div></div>
+          <div className="dice-statistic__quantity dice-statistic__desc">
+            <div className="dice-statistic__desc__title">Quantity Kept: </div>
+          </div>
           <input
             className="dice-statistic__quantity dice-statistic__input"
             type="text"
@@ -291,7 +296,9 @@ export default class DieStatisticPage extends Component {
             onChange={this.handleChange}
             value={this.state.quantity_kept}
           />
-          <div className='dice-statistic__tn dice-statistic__desc'><div className='dice-statistic__desc__title'>TN to Succeed: </div></div>
+          <div className="dice-statistic__tn dice-statistic__desc">
+            <div className="dice-statistic__desc__title">TN to Succeed: </div>
+          </div>
           <input
             className="dice-statistic__tn dice-statistic__input"
             type="text"
@@ -300,7 +307,9 @@ export default class DieStatisticPage extends Component {
             onChange={this.handleChange}
             value={this.state.target_tn}
           />
-          <div className='dice-statistic__opp dice-statistic__desc'><div className='dice-statistic__desc__title'>Required Opp: </div></div>
+          <div className="dice-statistic__opp dice-statistic__desc">
+            <div className="dice-statistic__desc__title">Required Opp: </div>
+          </div>
           <input
             className="dice-statistic__opp dice-statistic__input"
             type="text"
@@ -309,7 +318,9 @@ export default class DieStatisticPage extends Component {
             onChange={this.handleChange}
             value={this.state.target_opp}
           />
-          <div className='dice-statistic__advantage dice-statistic__desc'><div className='dice-statistic__desc__title'>Advantage Type: </div></div>
+          <div className="dice-statistic__advantage dice-statistic__desc">
+            <div className="dice-statistic__desc__title">Advantage Type: </div>
+          </div>
           <select
             className="dice-statistic__advantage dice-statistic__input dice-statistic__select"
             onChange={this.handleChange}

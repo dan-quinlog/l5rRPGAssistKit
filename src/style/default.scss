@@ -1,5 +1,5 @@
 html {
-  font-size: 62.5%; // 1rem is 10px
+  font-size: 24px; // 1rem is 10px
 }
 
 *,
@@ -30,7 +30,7 @@ body {
 .app {
   grid-column: left-margin/right-margin;
   display: grid;
-  grid-template-rows: [nav-bar-s] 60px [nav-bar-e body-s] 1fr [body-e];
+  grid-template-rows: 20px [nav-bar-s] 60px [nav-bar-e] 50px [body-s] 1fr [body-e];
   & > * {
     grid-row: body-s/body-e;
   }

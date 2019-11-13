@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default class Login extends Component {
   constructor(props) {
@@ -9,21 +11,32 @@ export default class Login extends Component {
       password: ""
     };
 
-    this.login = this.login.bind(this);
+    this.handeLogin = this.handeLogin.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  login() {
+  handeLogin() {
     event.preventDefault();
-    if (this.state.username != "" && this.state.password != "") {
-      this.props.handleLogIn(this.state.username, this.state.password);
-    } else {
-      console.log(
-        "login without fields",
-        this.state.username,
-        this.state.password
-      );
-    }
+    axios
+      .post(
+        "http://localhost:5000/login",
+        {
+          username: this.state.username,
+          password: this.state.password
+        },
+        {
+          withCredentials: true
+        }
+      )
+      .then(response => {
+        if (response.data == "AUTH_SUCCESS") {
+          this.props.handleSuccessfulLogin();
+          this.props.history.push("/account-information");
+        }
+      })
+      .catch(error => {
+        console.log("login error", error);
+      });
   }
 
   handleChange(event) {
@@ -36,9 +49,15 @@ export default class Login extends Component {
     return (
       <div className="login-wrapper">
         <div className="login-info login-wrapper__left">
-          Don't have an account? <a>Click here to create one!</a>
+          <div className="login-info__text">Don't have an account?</div>{" "}
+          <Link to="/sign-up" className="login-info__link">
+            Create one now!
+          </Link>
         </div>
-        <form className="login-form login-wrapper__right" onSubmit={this.login}>
+        <form
+          className="login-form login-wrapper__right"
+          onSubmit={this.handeLogin}
+        >
           <div className="login-form__username login-form__desc">
             <div className="login-form__desc__title">UserName: </div>
           </div>
