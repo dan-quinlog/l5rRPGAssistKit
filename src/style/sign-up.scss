@@ -1,4 +1,4 @@
-.login-wrapper {
+.signup-wrapper {
   font-size: 24px;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -14,7 +14,7 @@
     justify-self: left;
   }
 
-  .login-info {
+  .signup-info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,16 +25,19 @@
     }
   }
 
-  .login-form {
+  .signup-form {
     display: grid;
     grid-template-columns: [s] 400px [e];
-    grid-template-rows: [username-s] 65px [username-e password-s] 65px [password-e submit-s] 65px [submit-e];
+    grid-template-rows: [email-s] 65px [email-e username-s] 65px [username-e password-s] 65px [password-e submit-s] 65px [submit-e];
     row-gap: 10px;
 
     & > * {
       grid-column: s/e;
     }
 
+    &__email {
+      grid-row: email-s/email-e;
+    }
     &__username {
       grid-row: username-s/username-e;
     }

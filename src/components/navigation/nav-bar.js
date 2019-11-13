@@ -11,6 +11,7 @@ export default class NavBar extends Component {
 
     this.dynamicLink = this.dynamicLink.bind(this);
     this.toolKitDropdown = this.toolKitDropdown.bind(this);
+    this.toolKitDropdown_off = this.toolKitDropdown_off.bind(this);
   }
 
   dynamicLink(route, linkText) {
@@ -27,6 +28,9 @@ export default class NavBar extends Component {
     this.state.viewToolkit
       ? this.setState({ viewToolkit: false })
       : this.setState({ viewToolkit: true });
+  }
+  toolKitDropdown_off() {
+    this.setState({ viewToolkit: false });
   }
 
   render() {
@@ -45,10 +49,27 @@ export default class NavBar extends Component {
                 this.state.viewToolkit ? "" : "hidden"
               }`}
             >
-              <NavLink to="/campaign-management">Campaign Management</NavLink>
-              <NavLink to="/character-management">Campaign Management</NavLink>
-              <NavLink to="/campaign-search">Search Campaigns</NavLink>
-              <NavLink to="/die-statistics-page">Die Statistics</NavLink>
+              <NavLink
+                to="/campaign-management"
+                onClick={this.toolKitDropdown_off}
+              >
+                Campaign Management
+              </NavLink>
+              <NavLink
+                to="/character-management"
+                onClick={this.toolKitDropdown_off}
+              >
+                Character Management
+              </NavLink>
+              <NavLink to="/campaign-search" onClick={this.toolKitDropdown_off}>
+                Search Campaigns
+              </NavLink>
+              <NavLink
+                to="/die-statistics-page"
+                onClick={this.toolKitDropdown_off}
+              >
+                Die Statistics
+              </NavLink>
             </div>
           </div>
         ) : (
@@ -74,15 +95,25 @@ export default class NavBar extends Component {
         </div>
         {this.props.loggedIn === "LOGGED_IN" ? (
           <div className="nav-link-wrapper">
-            <NavLink exact to="/login" activeClassName="nav-link-active">
-              Account Settings 
+            <NavLink
+              exact
+              to="/account-information"
+              activeClassName="nav-link-active"
+            >
+              Account Information
             </NavLink>
-            <a onClick={this.props.handleLogOut}> Logout</a>
+            <NavLink
+              exact
+              to="/logout"
+              activeClassName="nav-link-active"
+            >
+              Logout
+            </NavLink>
           </div>
         ) : (
           <div className="nav-link-wrapper">
-            <NavLink exact to="/login" activeClassName="nav-link-active">
-              Sign Up 
+            <NavLink exact to="/sign-up" activeClassName="nav-link-active">
+              Sign Up
             </NavLink>
             <NavLink exact to="/login" activeClassName="nav-link-active">
               Login
