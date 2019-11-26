@@ -8,28 +8,54 @@ export default class SignUp extends Component {
     this.state = {
       email: "",
       username: "",
-      password: ""
+      password: "",
+      confirmpass: "",
+      recovery_question: "name",
+      recovery_answer: ""
     };
 
     this.signup = this.signup.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.canSubmit = this.canSubmit.bind(this);
+  }
+
+  canSubmit() {
+    if (
+      this.state.email == "" ||
+      this.state.username == "" ||
+      this.state.password == "" ||
+      this.state.password != this.state.confirmpass ||
+      this.state.recovery_answer == ""
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   signup() {
     event.preventDefault();
-    axios
-      .post("http://localhost:5000/signup", {
-        email: this.state.email,
-        username: this.state.username,
-        password: this.state.password
-      })
-      .then(response => {
-        console.log("login response", response);
-      })
-      .catch(error => {
-        console.log("login error", error);
-      });
+    if (this.canSubmit()) {
+      axios
+        .post("http://localhost:5000/signup", {
+          email: this.state.email,
+          username: this.state.username,
+          password: this.state.password,
+          recovery_question: this.state.recovery_question,
+          recovery_answer: this.state.recovery_answer
+        })
+        .then(response => {
+          if (response.data !== "SUCCESS") {
+            console.log("signup error", response);
+          } else {
+            this.props.history.push("/login");
+          }
+        })
+        .catch(error => {
+          console.log("login error", error);
+        });
+    }
   }
 
   handleSignUp(email, username, password) {
@@ -70,6 +96,7 @@ export default class SignUp extends Component {
             placeholder=""
             onChange={this.handleChange}
             value={this.state.email}
+            required={true}
           />
 
           <div className="signup-form__username signup-form__desc">
@@ -96,9 +123,55 @@ export default class SignUp extends Component {
             value={this.state.password}
           />
 
-          <button className="button signup-form__submit" type="submit">
-            Submit
-          </button>
+          <div className="signup-form__confirmpass signup-form__desc">
+            <div className="signup-form__desc__title">Confirm: </div>
+          </div>
+          <input
+            className="signup-form__confirmpass signup-form__input"
+            type="password"
+            name="confirmpass"
+            placeholder=""
+            onChange={this.handleChange}
+            value={this.state.confirmpass}
+          />
+
+          <select
+            className="signup-form__recovery-question signup-form__desc"
+            onChange={this.handleChange}
+            value={this.state.recovery_question}
+            name="recovery_question"
+          >
+            <option value="What... is your name?">What... is your name?</option>
+            <option value="What... is your quest?">What... is your quest?</option>
+            <option value="What... is your favorite color?">
+              What... is your favorite color?
+            </option>
+            <option value="What... is the capital of Assyria?">
+              What... is the capital of Assyria?
+            </option>
+            <option value="What... is the air-speed velocity of an unladen swallow?">
+              What... is the air-speed velocity of an unladen swallow?
+            </option>
+          </select>
+
+          <div className="signup-form__recovery-answer signup-form__desc">
+            <div className="signup-form__desc__title">Answer: </div>
+          </div>
+          <input
+            className="signup-form__recovery-answer signup-form__input"
+            type="text"
+            name="recovery_answer"
+            placeholder=""
+            onChange={this.handleChange}
+            value={this.state.recovery_answer}
+          />
+          {this.canSubmit() ? (
+            <button className="button signup-form__submit" type="submit">
+              Submit
+            </button>
+          ) : (
+            <div className="button signup-form__submit">Complete Form</div>
+          )}
         </form>
       </div>
     );

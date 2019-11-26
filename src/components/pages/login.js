@@ -53,6 +53,9 @@ export default class Login extends Component {
           <Link to="/sign-up" className="login-info__link">
             Create one now!
           </Link>
+          <Link to='/forgot-password' className="login-info__link">
+            Forgot password?
+          </Link>
         </div>
         <form
           className="login-form login-wrapper__right"

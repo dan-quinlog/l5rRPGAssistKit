@@ -15,6 +15,7 @@ import CampaignSearch from "./pages/campaign-search";
 import DieStats from "./pages/die-statistics-page";
 import Forum from "./pages/forum";
 import About from "./pages/about";
+import ForgotPassword from "./pages/forgot-password";
 import Login from "./pages/login";
 import Logout from "./pages/logout";
 import SignUp from "./pages/signup";
@@ -101,6 +102,7 @@ export default class App extends Component {
               <Route path="/die-statistics-page" component={DieStats} />
               <Route path="/forum" component={Forum} />
               <Route path="/about" component={About} />
+              <Route path="/forgot-password" component={ForgotPassword} />
               <Route
                 path="/sign-up"
                 render={props => (

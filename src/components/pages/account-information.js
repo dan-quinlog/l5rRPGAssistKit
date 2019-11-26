@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import UpdateAccount from "../forms/update-account";
+import AdminPanel from './admin-panel';
 
 export default class AccountInformation extends Component {
   constructor(props) {
@@ -13,12 +14,11 @@ export default class AccountInformation extends Component {
       permission: ""
     };
 
-    this.handleSuccessfulUpdate=this.handleSuccessfulUpdate.bind(this)
+    this.handleSuccessfulUpdate = this.handleSuccessfulUpdate.bind(this);
   }
 
-
   handleSuccessfulUpdate() {
-    console.log('update successful')
+    console.log("update successful");
     this.getAccountInfo();
   }
 
@@ -50,8 +50,8 @@ export default class AccountInformation extends Component {
       <div>
         <div>{this.state.username}</div>
         <div>{this.state.email}</div>
-        <UpdateAccount handleSuccessfulUpdate={this.handleSuccessfulUpdate}/>
-        <div>admin panel</div>
+        <UpdateAccount handleSuccessfulUpdate={this.handleSuccessfulUpdate} />
+        {this.state.permission > 0 ? <AdminPanel /> : ""}
       </div>
     );
   }

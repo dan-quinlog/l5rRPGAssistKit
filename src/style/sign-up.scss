@@ -28,7 +28,7 @@
   .signup-form {
     display: grid;
     grid-template-columns: [s] 400px [e];
-    grid-template-rows: [email-s] 65px [email-e username-s] 65px [username-e password-s] 65px [password-e submit-s] 65px [submit-e];
+    grid-template-rows: [email-s] 65px [email-e username-s] 65px [username-e password-s] 65px [password-e confirmpass-s] 65px [confirmpass-e recovery-question-s] 65px [recovery-question-e recovery-answer-s] 65px [recovery-answer-e submit-s] 65px [submit-e];
     row-gap: 10px;
 
     & > * {
@@ -43,6 +43,22 @@
     }
     &__password {
       grid-row: password-s/password-e;
+    }
+    &__confirmpass {
+      grid-row: confirmpass-s/confirmpass-e;
+    }
+    &__recovery-question {
+      grid-row: recovery-question-s/recovery-question-e;
+      color: $dark-ink;
+      font: 600 24px "Montez", cursive;
+      text-indent: 5px;
+      font-size: 0.7em;
+      option {
+        background: $dark-parchment;
+      }
+    }
+    &__recovery-answer {
+      grid-row: recovery-answer-s/recovery-answer-e;
     }
     &__submit {
       grid-row: submit-s/submit-e;

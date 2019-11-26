@@ -10,7 +10,9 @@ export default class UpdateAccount extends Component {
       email: "",
       password: "",
       newpass: "",
-      confirm: ""
+      confirm: "",
+      recovery_question: "",
+      recovery_answer: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -30,6 +32,12 @@ export default class UpdateAccount extends Component {
     }
     if (this.state.newpass != "") {
       formData.append("newpass", this.state.newpass);
+    }
+    if (this.state.recovery_question != "") {
+      formData.append("recovery_question", this.state.recovery_question);
+    }
+    if (this.state.recovery_answer != "") {
+      formData.append("recovery_answer", this.state.recovery_answer);
     }
     formData.append("password", this.state.password);
 
@@ -51,7 +59,9 @@ export default class UpdateAccount extends Component {
               email: "",
               password: "",
               newpass: "",
-              confirm: ""
+              confirm: "",
+              recovery_question: '',
+              recovery_answer: ''
             });
           } else {
             console.log("update account error", response.data);
@@ -77,7 +87,9 @@ export default class UpdateAccount extends Component {
       this.state.newpass == this.state.confirm &&
       (this.state.username != "" ||
         this.state.email != "" ||
-        this.state.newpass != "")
+        this.state.newpass != "" ||
+        (this.state.recovery_question != "" &&
+          this.state.recovery_answer != ""))
     ) {
       return true;
     } else {
@@ -127,6 +139,22 @@ export default class UpdateAccount extends Component {
           placeholder="confirm new password"
           onChange={this.handleChange}
           value={this.state.confirm}
+        />
+        <input
+          className="update-account__recovery-question"
+          type="text"
+          name="recovery_question"
+          placeholder="recovery question"
+          onChange={this.handleChange}
+          value={this.state.recovery_question}
+        />
+        <input
+          className="update-account__recovery-answer"
+          type="text"
+          name="recovery_answer"
+          placeholder="new recovery answer"
+          onChange={this.handleChange}
+          value={this.state.recovery_answer}
         />
         {this.canSubmit() ? (
           <button
