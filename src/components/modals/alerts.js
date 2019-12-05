@@ -17,12 +17,13 @@ export default class AlertModal extends Component {
 
     this.customStyles = {
       content: {
-        top: "50%",
+        top: "25%",
         left: "50%",
         right: "auth",
         marginRight: "-50%",
         transform: "translate(-50%, -50%)",
-        width: "400px"
+        width: "400px",
+        height: "100px",
       },
       overlay: {
         backgroundColor: "rgba(1,1,1,0.75)"
@@ -40,7 +41,7 @@ export default class AlertModal extends Component {
   formType(action) {
     switch (action) {
       case 'ALERT':
-        return <AlertLayout />;
+        return <AlertLayout alertText={this.props.alertText} />;
       case 'CONFIRM':
         return <ConfirmLayout alertText={this.props.alertText} confirm={this.props.confirm} deny={this.props.deny} />;
       case 'TOOLTIP':

@@ -36,9 +36,22 @@ export default class NavBar extends Component {
   render() {
     return (
       <div className="nav-wrapper">
+        {this.props.loggedIn === "LOGGED_IN" ? (
+          <div className="nav-link-wrapper">
+            <NavLink exact to="/" activeClassName="nav-link-active">
+              Play
+            </NavLink>
+          </div>
+        ) : (
+          <div className="nav-link-wrapper">
+            <NavLink exact to="/" activeClassName="nav-link-active">
+              Home
+            </NavLink>
+          </div>
+        )}
         <div className="nav-link-wrapper">
-          <NavLink exact to="/" activeClassName="nav-link-active">
-            Home
+          <NavLink exact to="/forum" activeClassName="nav-link-active">
+            Discord
           </NavLink>
         </div>
         {this.props.loggedIn === "LOGGED_IN" ? (
@@ -84,11 +97,6 @@ export default class NavBar extends Component {
           </div>
         )}
         <div className="nav-link-wrapper">
-          <NavLink exact to="/forum" activeClassName="nav-link-active">
-            Forum
-          </NavLink>
-        </div>
-        <div className="nav-link-wrapper">
           <NavLink exact to="/about" activeClassName="nav-link-active">
             About
           </NavLink>
@@ -102,11 +110,7 @@ export default class NavBar extends Component {
             >
               Account Information
             </NavLink>
-            <NavLink
-              exact
-              to="/logout"
-              activeClassName="nav-link-active"
-            >
+            <NavLink exact to="/logout" activeClassName="nav-link-active">
               Logout
             </NavLink>
           </div>

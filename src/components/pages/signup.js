@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import AlertModal from "../modals/alerts";
+
 export default class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -11,13 +13,22 @@ export default class SignUp extends Component {
       password: "",
       confirmpass: "",
       recovery_question: "name",
-      recovery_answer: ""
+      recovery_answer: "",
+      alertModalIsOpen: false,
+      alertModalText: ""
     };
 
     this.signup = this.signup.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.canSubmit = this.canSubmit.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
+  }
+
+  handleModalClose() {
+    this.setState({
+      alertModalIsOpen: false
+    });
   }
 
   canSubmit() {
@@ -46,10 +57,43 @@ export default class SignUp extends Component {
           recovery_answer: this.state.recovery_answer
         })
         .then(response => {
-          if (response.data !== "SUCCESS") {
-            console.log("signup error", response);
-          } else {
-            this.props.history.push("/login");
+          switch (response.data) {
+            case "SUCCESS":
+              this.setState({
+                alertModalIsOpen: true,
+                alertModalText: "Account Created, Directing you to login page"
+              });
+              setTimeout(() => {
+                this.setState({
+                  alertModalIsOpen: false
+                });
+                this.props.history.push("/login");
+              }, 1000);
+              break;
+            case "EMAIL_EXISTS":
+              this.setState({
+                alertModalIsOpen: true,
+                alertModalText:
+                  "Email exists in users.  Do you already have an account?"
+              });
+              setTimeout(() => {
+                this.setState({
+                  alertModalIsOpen: false
+                });
+              }, 1000);
+              break;
+            case "USERNAME_EXISTS":
+              this.setState({
+                alertModalIsOpen: true,
+                alertModalText:
+                  "Username exists in users.  Do you already have an account?"
+              });
+              setTimeout(() => {
+                this.setState({
+                  alertModalIsOpen: false
+                });
+              }, 1000);
+              break;
           }
         })
         .catch(error => {
@@ -72,6 +116,12 @@ export default class SignUp extends Component {
   render() {
     return (
       <div className="signup-wrapper">
+        <AlertModal
+          modalAction={"ALERT"}
+          handleModalClose={this.handleModalClose}
+          modalIsOpen={this.state.alertModalIsOpen}
+          alertText={this.state.alertModalText}
+        />
         <div className="signup-info signup-wrapper__left">
           <ul>
             <li>Use an email you can access to receive messages</li>
@@ -142,7 +192,9 @@ export default class SignUp extends Component {
             name="recovery_question"
           >
             <option value="What... is your name?">What... is your name?</option>
-            <option value="What... is your quest?">What... is your quest?</option>
+            <option value="What... is your quest?">
+              What... is your quest?
+            </option>
             <option value="What... is your favorite color?">
               What... is your favorite color?
             </option>

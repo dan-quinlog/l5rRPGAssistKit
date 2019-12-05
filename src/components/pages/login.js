@@ -2,17 +2,28 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import AlertModal from "../modals/alerts";
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      alertModalIsOpen: false,
+      alertModalText: ""
     };
 
     this.handeLogin = this.handeLogin.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
+  }
+
+  handleModalClose() {
+    this.setState({
+      alertModalIsOpen: false
+    });
   }
 
   handeLogin() {
@@ -29,9 +40,37 @@ export default class Login extends Component {
         }
       )
       .then(response => {
+        switch(response.data) {
+          case 'AUTH_SUCCESS':
+            this.props.handleSuccessfulLogin();
+            this.props.history.push("/account-information");
+            break;
+          case 'USER_NOT_FOUND':
+              this.setState({
+                alertModalIsOpen: true,
+                alertModalText:
+                  "User Account not found"
+              });
+              setTimeout(() => {
+                this.setState({
+                  alertModalIsOpen: false
+                });
+              }, 1000);
+              break;
+          case 'AUTH_FAILED':
+              this.setState({
+                alertModalIsOpen: true,
+                alertModalText:
+                  "Authorization failed, check your credentials"
+              });
+              setTimeout(() => {
+                this.setState({
+                  alertModalIsOpen: false
+                });
+              }, 1000);
+              break;
+        }
         if (response.data == "AUTH_SUCCESS") {
-          this.props.handleSuccessfulLogin();
-          this.props.history.push("/account-information");
         }
       })
       .catch(error => {
@@ -48,6 +87,12 @@ export default class Login extends Component {
   render() {
     return (
       <div className="login-wrapper">
+        <AlertModal
+          modalAction={"ALERT"}
+          handleModalClose={this.handleModalClose}
+          modalIsOpen={this.state.alertModalIsOpen}
+          alertText={this.state.alertModalText}
+        />
         <div className="login-info login-wrapper__left">
           <div className="login-info__text">Don't have an account?</div>{" "}
           <Link to="/sign-up" className="login-info__link">
